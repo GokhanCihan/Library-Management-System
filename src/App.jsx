@@ -1,12 +1,12 @@
 import './App.css'
+import Main from './layouts/Main'
+import Authors from './pages/Authors'
 
 function App() {
 
   return (
     <>
-      <div>
-        Hello World
-      </div>
+      <Main children={<Authors />}/>
     </>
   )
 }

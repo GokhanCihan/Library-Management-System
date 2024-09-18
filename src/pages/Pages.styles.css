@@ -1,0 +1,30 @@
+.page {
+  text-align: center;
+ }
+ 
+ .page h3 {
+   background-color: peachpuff;
+ }
+ 
+ .page-list {
+   width: 60%;
+   margin: 0 auto;
+   border: 3px solid tomato;
+ }
+ 
+ .page-list-header {
+   display: grid;
+   grid-template-columns: 0.5fr 1fr 1fr 1fr;
+   flex-wrap: nowrap;
+   font-weight: 600;
+ }
+ 
+ .page-list-info {
+   display: grid;
+   grid-template-columns: 0.5fr 1fr 1fr 1fr;
+   flex-wrap: nowrap;
+ }
+ 
+ .page-list>.page-list-info {
+   border: 1px solid black;
+ }
