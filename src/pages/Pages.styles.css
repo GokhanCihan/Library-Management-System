@@ -14,17 +14,29 @@
  
  .page-list-header {
    display: grid;
-   grid-template-columns: 0.5fr 1fr 1fr 1fr;
+   grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
    flex-wrap: nowrap;
    font-weight: 600;
  }
  
  .page-list-info {
    display: grid;
-   grid-template-columns: 0.5fr 1fr 1fr 1fr;
+   grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
    flex-wrap: nowrap;
  }
  
  .page-list>.page-list-info {
    border: 1px solid black;
+ }
+
+ .record-item {
+  width: 30%;
+  margin: 0 auto;
+ }
+
+ .record-item .field{
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  text-align: start;
+  row-gap: 3rem;
  }
