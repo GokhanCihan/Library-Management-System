@@ -1,6 +1,6 @@
 import './App.css'
 import Main from './layouts/Main'
-import Authors from './pages/Authors'
+import Authors from './pages/Authors/Authors'
 
 function App() {
 
