@@ -1,13 +1,15 @@
 import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
+import CreateBook from './CreateBook';
 import '../Pages.styles.css';
 
 function Books() {
   const [books, setBooks] = useState([]);
+  const [selectedBookId, setSelectedBookId] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-  const [selectedId, setSelectedId] = useState(0);
+
   
   useEffect(() => {
     fetchBookList();
@@ -43,7 +45,7 @@ function Books() {
 
   const handleEdit = (id) => {
     setIsEditing(true);
-    setSelectedId(id);
+    setSelectedBookId(id);
   }
 
   const handleCancel = () => {
@@ -68,19 +70,12 @@ function Books() {
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
-      {/* isEditing && 
-      <EditBook 
-        setIsEditing={setIsEditing}
-        selectedId={selectedId}
-        fetchBookList={fetchBookList}
-        handleCancel={handleCancel}
-      />}
       {isCreating && 
-      <CreateBook 
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />}
-      {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Book</button>*/}
+        <CreateBook 
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />}
+        {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Book</button>}
     </div>
   )
 }
