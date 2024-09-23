@@ -13,24 +13,23 @@ function CreateBook({handleSubmit, handleCancel}) {
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
   const [publishers, setPublishers] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
-    fetchAuthorList();
-    fetchCategoryList();
-    fetchPublisherList();
+    fetchAuthors();
+    fetchCategories();
+    fetchPublishers();
   },[])
 
-  const fetchAuthorList = async () => {
+  const fetchAuthors = async () => {
     try {
       const response = await services.authorService.findAll();
-      setAuthors(response.data.map(item => {return {...item, label: item.name}}))
+      setAuthors(response.data)
     }catch(error) {
       console.log(error)
     }
   }
 
-  const fetchCategoryList = async () => {
+  const fetchCategories = async () => {
     try {
       const response = await services.categoryService.findAll();
       setCategories(response.data);
@@ -39,10 +38,10 @@ function CreateBook({handleSubmit, handleCancel}) {
     }
   }
 
-  const fetchPublisherList = async () => {
+  const fetchPublishers = async () => {
     try {
       const response = await services.publisherService.findAll();
-      setPublishers(response.data.map(item => {return {...item, label: item.name}}))
+      setPublishers(response.data)
     }catch(error) {
       console.log(error)
     }
@@ -76,6 +75,7 @@ function CreateBook({handleSubmit, handleCancel}) {
         </div>
           <Autocomplete
             options={authors}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => <TextField {...params} label="select author" placeholder="authors" />}
             onChange={(event, value, reason) => handleChangeAuthor(value)}
           />
@@ -88,12 +88,13 @@ function CreateBook({handleSubmit, handleCancel}) {
           />
           <Autocomplete 
             options={publishers}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => <TextField {...params} label="select publisher" placeholder="publishers" />}
             onChange={(event, value, reason) => handleChangePublisher(value)}
           />
         <div className='field'>
           <label>Stock</label>
-          <input onChange={handleChange} value={book.stock} name='stock' type="text" />
+          <input name='stock' type="text" value={book.stock} onChange={handleChange} />
         </div>
         <div className='btn-container'>
           <button onClick={handleCreate}>Create</button>

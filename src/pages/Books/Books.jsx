@@ -2,6 +2,7 @@ import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
 import CreateBook from './CreateBook';
+import EditBook from'./EditBook';
 import '../Pages.styles.css';
 
 function Books() {
@@ -10,12 +11,11 @@ function Books() {
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
-  
   useEffect(() => {
-    fetchBookList();
+    fetchBooks();
   }, [])
 
-  const fetchBookList = async () => {
+  const fetchBooks = async () => {
     try {
       const response = await services.bookService.findAll();
       setBooks(response.data);
@@ -27,7 +27,7 @@ function Books() {
   const handleDelete = async (id) => {
     try {
       await services.bookService.remove(id);
-      fetchBookList();
+      fetchBooks();
     }catch(error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ function Books() {
     try {
       await services.bookService.create(newBook);
       setIsCreating(false);
-      fetchBookList();
+      fetchBooks();
     }catch(error) {
       console.log(error.response.data);
     }
@@ -70,6 +70,13 @@ function Books() {
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
+      {isEditing && 
+      <EditBook 
+        setIsEditing={setIsEditing}
+        selectedId={selectedBookId}
+        fetchBooks={fetchBooks}
+        handleCancel={handleCancel}
+      />}
       {isCreating && 
         <CreateBook 
           handleSubmit={handleSubmit}
