@@ -2,6 +2,7 @@ import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
 import CreateBorrowing from './CreateBorrowing';
+import EditBorrowing from './EditBorrowing';
 import '../Pages.styles.css';
 
 function Borrowings() {
@@ -65,6 +66,13 @@ function Borrowings() {
       {isCreating && 
         <CreateBorrowing 
           handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />}
+      {isEditing && 
+        <EditBorrowing 
+          setIsEditing={setIsEditing}
+          selectedId={selectedId}
+          fetchBorrowings={fetchBorrowings}
           handleCancel={handleCancel}
         />}
       {(!isCreating && !isEditing) &&
