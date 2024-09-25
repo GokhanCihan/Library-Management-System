@@ -1,6 +1,7 @@
 import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
+import CreateBorrowing from './CreateBorrowing';
 import '../Pages.styles.css';
 
 function Borrowings() {
@@ -61,6 +62,13 @@ function Borrowings() {
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
+      {isCreating && 
+        <CreateBorrowing 
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />}
+      {(!isCreating && !isEditing) &&
+        <button onClick={(() => setIsCreating(true))}>Add New Borrowing</button>}
     </div>
   )
 }
