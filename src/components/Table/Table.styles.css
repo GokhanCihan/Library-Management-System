@@ -3,7 +3,6 @@
   flex-direction: column;
   position: relative;
   height: 50vh;
-  width: 80%;
   margin: 0 auto;
   overflow-y: scroll;
   padding: 0 1rem;
@@ -19,7 +18,7 @@
 
 .table .header-row {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
+  padding: 10px 10px;
   flex-wrap: nowrap;
   font-weight: 600;
   text-align: start;
@@ -34,14 +33,38 @@
 
 .row {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
   flex-wrap: nowrap;
   padding: 10px 10px;
   border: 1px solid gray;
   border-radius: 10px;
   column-gap: 10px;
+  align-items: center;
 }
 
 .row-container .row:nth-child(2n){
   background-color: silver;
+}
+
+.row .btn-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.row .btn-container button {
+  padding: 5px 10px;
+  height: min-content;
+  align-items: center;
+  border-style: none;
+  border-radius: 7px;
+  color: white;
+}
+
+.row .btn-container .del-btn {
+  background-color: tomato;
+}
+
+.row .btn-container .edit-btn {
+  background-color:sandybrown;
 }
