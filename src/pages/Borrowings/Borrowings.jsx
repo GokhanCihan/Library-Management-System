@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
 import CreateBorrowing from './CreateBorrowing';
 import EditBorrowing from './EditBorrowing';
+import Main from '../../layouts/Main';
 import '../Pages.styles.css';
 
 function Borrowings() {
@@ -54,30 +55,31 @@ function Borrowings() {
   }
 
   return (
-    <div className='page'>
-      <h2>Borrowed Books Page</h2>
-      <Table 
-        title={"Borrowed Books"}
-        columns={["ID", "Borrower", "Mail", "Date Borrowed", "Date Returned", "Book"]}
-        data={borrowings.map(item => ({...item, "book": item.book.name,}))}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-      {isCreating && 
-        <CreateBorrowing 
-          handleSubmit={handleSubmit}
-          handleCancel={handleCancel}
-        />}
-      {isEditing && 
-        <EditBorrowing 
-          setIsEditing={setIsEditing}
-          selectedId={selectedId}
-          fetchBorrowings={fetchBorrowings}
-          handleCancel={handleCancel}
-        />}
-      {(!isCreating && !isEditing) &&
-        <button onClick={(() => setIsCreating(true))}>Add New Borrowing</button>}
-    </div>
+    <Main>    
+      <div className='page'>
+        <Table 
+          title={"Borrowing Records"}
+          columns={["Borrower", "Mail", "Date Borrowed", "Date Returned", "Book"]}
+          data={borrowings.map(item => ({...item, "book": item.book.name,}))}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        {isCreating && 
+          <CreateBorrowing 
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
+          />}
+        {isEditing && 
+          <EditBorrowing 
+            setIsEditing={setIsEditing}
+            selectedId={selectedId}
+            fetchBorrowings={fetchBorrowings}
+            handleCancel={handleCancel}
+          />}
+        {(!isCreating && !isEditing) &&
+          <button onClick={(() => setIsCreating(true))}>Add New Borrowing</button>}
+      </div>
+    </Main>
   )
 }
 

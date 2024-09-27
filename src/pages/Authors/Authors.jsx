@@ -4,6 +4,7 @@ import Table from '../../components/Table';
 import '../Pages.styles.css';
 import EditAuthor from './EditAuthor';
 import CreateAuthor from './CreateAuthor';
+import Main from '../../layouts/Main';
 
 function Authors() {
   const [authors, setAuthors] = useState([]);
@@ -54,29 +55,30 @@ function Authors() {
   }
 
   return (
-    <div className='page'>
-      <h2>Author Page</h2>
-      <Table 
-        title={"Authors"}
-        columns={["ID", "Name", "Date of Birth", "Country"]}
-        data={authors}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-      {isEditing && 
-      <EditAuthor 
-        setIsEditing={setIsEditing}
-        selectedId={selectedId}
-        fetchAuthorList={fetchAuthorList}
-        handleCancel={handleCancel}
-      />}
-      {isCreating && 
-      <CreateAuthor 
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />}
-      {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Author</button>}
-    </div>
+    <Main>
+      <div className='page'>
+        <Table 
+          title={"Author Records"}
+          columns={["Name", "Date of Birth", "Country"]}
+          data={authors}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        {isEditing && 
+        <EditAuthor 
+          setIsEditing={setIsEditing}
+          selectedId={selectedId}
+          fetchAuthorList={fetchAuthorList}
+          handleCancel={handleCancel}
+        />}
+        {isCreating && 
+        <CreateAuthor 
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />}
+        {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Author</button>}
+      </div>      
+    </Main>
   )
 }
 

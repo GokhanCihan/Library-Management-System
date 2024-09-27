@@ -4,6 +4,7 @@ import Table from '../../components/Table';
 import CreateBook from './CreateBook';
 import EditBook from'./EditBook';
 import '../Pages.styles.css';
+import Main from '../../layouts/Main';
 
 function Books() {
   const [books, setBooks] = useState([]);
@@ -54,36 +55,39 @@ function Books() {
   }
 
   return (
-    <div className='page'>
-      <h2>Book Page</h2>
-      <Table 
-        title={"Books"}
-        columns={["ID", "Name", "Publication Year", "Author", "Categories", "Publisher", "Stock"]}
-        data={books.map(item => {
-          return {...item, 
-            "author": item.author.name, 
-            "publisher": item.publisher.name, 
-            "categories": item.categories.map(category => {
-              return category.name
-            }).join(', ')}
-        })}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-      {isEditing && 
-      <EditBook 
-        setIsEditing={setIsEditing}
-        selectedId={selectedBookId}
-        fetchBooks={fetchBooks}
-        handleCancel={handleCancel}
-      />}
-      {isCreating && 
-        <CreateBook 
-          handleSubmit={handleSubmit}
+    <Main>
+      <div className='page'>
+        <Table 
+          title={"Book Records"}
+          columns={["Name", "Publication Year", "Stock", "Author", "Publisher","Categories"]}
+          data={books.map(item => {
+            return {...item, 
+              "author": item.author.name,
+              "categories": item.categories.map(category => {
+                return category.name
+              }).join(', '),
+              "publisher": item.publisher.name, 
+              "stock": item.stock
+            }
+          })}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        {isEditing && 
+        <EditBook 
+          setIsEditing={setIsEditing}
+          selectedId={selectedBookId}
+          fetchBooks={fetchBooks}
           handleCancel={handleCancel}
         />}
-        {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Book</button>}
-    </div>
+        {isCreating && 
+          <CreateBook 
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
+          />}
+          {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Book</button>}
+      </div>
+    </Main>
   )
 }
 

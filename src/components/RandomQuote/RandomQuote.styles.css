@@ -1,0 +1,10 @@
+.random-quote {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.quote-author {
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 1rem;
+}

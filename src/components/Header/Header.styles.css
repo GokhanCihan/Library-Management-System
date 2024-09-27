@@ -1,11 +1,13 @@
 .header {
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
   text-align: center;
 }
 
-.navigation {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-  gap: 3rem;
-  list-style: none;
+.header .page-link img {
+  object-fit: contain;
+  height: 60px;
 }

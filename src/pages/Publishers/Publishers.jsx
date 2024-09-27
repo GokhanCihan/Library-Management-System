@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import services from "../../services";
 import Table from "../../components/Table";
 import CreatePublisher from "./CreatePublisher";
-import { useActionData } from "react-router-dom";
 import EditPublisher from "./EditPublisher";
+import Main from "../../layouts/Main";
+import './../Pages.styles.css'
 
 function Publishers() {
   const [publishers, setPublishers] = useState([]);
@@ -54,30 +55,31 @@ function Publishers() {
   }
 
   return (
-    <div className='page'>
-      <h2>Publishers Page</h2>
-      <Table 
-        title={"Publishers"}
-        columns={["ID", "Name", "Establisment Year", "Address"]}
-        data={publishers}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-      {isEditing &&
-        <EditPublisher
-          setIsEditing={setIsEditing}
-          selectedId={selectedId}
-          fetchPublisherList={fetchPublisherList}
+    <Main>
+      <div className='page'>
+        <Table 
+          title={"Publisher Records"}
+          columns={["Name", "Establisment Year", "Address"]}
+          data={publishers}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        {isEditing &&
+          <EditPublisher
+            setIsEditing={setIsEditing}
+            selectedId={selectedId}
+            fetchPublisherList={fetchPublisherList}
+            handleCancel={handleCancel}
+          />  
+        }
+        {isCreating &&
+          <CreatePublisher
+          handleSubmit={handleSubmit}
           handleCancel={handleCancel}
-        />  
-      }
-      {isCreating &&
-        <CreatePublisher
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />}
-      {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Publisher</button>}
-    </div>
+        />}
+        {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Publisher</button>}
+      </div>
+    </Main>
   )
 }
 

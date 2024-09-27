@@ -1,4 +1,5 @@
 import React from "react";
+import PageNavigation from "../PageNavigation";
 import './Header.styles.css';
 
 function Header() {
@@ -6,13 +7,7 @@ function Header() {
   return (
     <div className="header">
       <h1>Library Management System</h1>
-      <ul className="navigation">
-        <li>Books</li>
-        <li>Categories</li>
-        <li>Publishers</li>
-        <li>Borrowing</li>
-        <li>Authors</li>
-      </ul>
+      <PageNavigation />
     </div>
   )
 }

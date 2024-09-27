@@ -1,9 +1,10 @@
 import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
-import '../Pages.styles.css';
 import EditCategory from './EditCategory';
 import CreateCategory from './CreateCategory';
+import Main from '../../layouts/Main';
+import '../Pages.styles.css';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -54,29 +55,30 @@ function Categories() {
   }
 
   return (
-    <div className='page'>
-      <h2>Category Page</h2>
-      <Table 
-        title={"Categories"}
-        columns={["ID", "Name", "Description"]}
-        data={categories}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-      {isEditing && 
-      <EditCategory 
-        setIsEditing={setIsEditing}
-        selectedId={selectedId}
-        fetchCategoryList={fetchCategoryList}
-        handleCancel={handleCancel}
-      />}
-      {isCreating && 
-      <CreateCategory 
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />}
-      {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Category</button>}
-    </div>
+    <Main>
+      <div className='page'>
+        <Table 
+          title={"Category Records"}
+          columns={["Name", "Description"]}
+          data={categories}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        {isEditing && 
+          <EditCategory 
+            setIsEditing={setIsEditing}
+            selectedId={selectedId}
+            fetchCategoryList={fetchCategoryList}
+            handleCancel={handleCancel}
+          />}
+        {isCreating && 
+          <CreateCategory 
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
+          />}
+        {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Category</button>}
+      </div>
+    </Main>
   )
 }
 

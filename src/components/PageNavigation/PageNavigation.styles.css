@@ -1,0 +1,23 @@
+.page-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: auto auto;
+}
+
+.page-link {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  align-self: flex-end;
+  border-style: none;
+  border: 1px solid blanchedalmond;
+  background-color: transparent;
+}
+
+.page-link img {
+  width: 120px;
+  height: 120px;
+}
