@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
+import { useNavigate, useParams } from "react-router-dom";
 
-function EditBorrowing({setIsEditing, selectedId, handleCancel, fetchBorrowings}) {
-
+function EditBorrowing() {
   const [selectedBorrowing, setSelectedBorrowing] = useState([]);
   const [borrowing, setBorrowing] = useState([]);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBorrowing();
@@ -12,19 +15,9 @@ function EditBorrowing({setIsEditing, selectedId, handleCancel, fetchBorrowings}
 
   const fetchBorrowing = async () => {
     try {
-      const response = await services.borrowingService.find(selectedId);
+      const response = await services.borrowingService.find(id);
       setSelectedBorrowing(response.data);
     }catch(error) {
-      console.log(error);
-    }
-  }
-
-  const handleSave = async () => {
-    try {
-      await services.borrowingService.update(selectedId, borrowing);
-      fetchBorrowings();
-      setIsEditing(false);
-    } catch (error) {
       console.log(error);
     }
   }
@@ -34,26 +27,39 @@ function EditBorrowing({setIsEditing, selectedId, handleCancel, fetchBorrowings}
     borrowingDate: selectedBorrowing.borrowingDate,
     [e.target.name]: e.target.value,
   });
+
+  const handleSave = async () => {
+    try {
+      await services.borrowingService.update(id, borrowing);
+      navigate('/borrowings')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleCancel = () => {
+    navigate('/borrowings');
+  }
   
   return (
     <>
-      <h3>Edit Borrowing Record</h3>
+      <h3>Edit Borrowing</h3>
       <div className='add-item'>
         <div className='field'>
           <label>Borrower Name:</label>
-          <input name="borrowerName" type="text" disabled={true} value={selectedBorrowing.borrowerName} />
+          <input name="borrowerName" type="text" disabled={true} defaultValue={selectedBorrowing.borrowerName} />
         </div>
         <div className='field'>
           <label>Date Borrowed:</label>
-          <input name='borrowingDate' type="date" disabled={true} value={selectedBorrowing.borrowingDate} />
+          <input name='borrowingDate' type="date" disabled={true} defaultValue={selectedBorrowing.borrowingDate} />
         </div>
         <div className='field'>
           <label>Date Returned:</label>
-          <input name='returnDate' type="date" value={selectedBorrowing.returnDate} onChange={handleChange} />
+          <input name='returnDate' type="date" defaultValue={selectedBorrowing.returnDate} onChange={handleChange} />
         </div>
         <div className='btn-container'>
           <button onClick={handleSave}>Save</button>
-          <button onClick={() => handleCancel()}>Cancel</button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </>

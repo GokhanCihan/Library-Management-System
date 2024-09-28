@@ -46,7 +46,7 @@ function Publishers() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-      <button onClick={() => navigate('/publishers/new')}>New Publisher</button>
+      <button className="create" onClick={() => navigate('/publishers/new')}>New Publisher</button>
       </div>
     </Main>
   )

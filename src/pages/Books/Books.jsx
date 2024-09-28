@@ -55,7 +55,7 @@ function Books() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-       <button onClick={() => navigate('/books/new')}>New Book</button>
+       <button className="create" onClick={() => navigate('/books/new')}>New Book</button>
       </div>
     </Main>
   )

@@ -46,7 +46,7 @@ function Categories() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-       <button onClick={() => navigate('/categories/new')}>New Category</button>
+       <button className="create" onClick={() => navigate('/categories/new')}>New Category</button>
       </div>
     </Main>
   )

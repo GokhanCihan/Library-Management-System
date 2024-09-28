@@ -1,59 +1,79 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
+import { useNavigate, useParams } from "react-router-dom";
 
-function EditAuthor({setIsEditing, selectedId, fetchAuthorList, handleCancel}) {
-  const [author, setAuthor] = useState({
-    name: "",
-    birthDate: "",
-    country: ""
-  });
+function EditAuthor() {
+  const [author, setAuthor] = useState();
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAuthor();
-  },[selectedId])
+  },[])
 
   const fetchAuthor = async () => {
     try {
-      const response = await services.authorService.find(selectedId);
+      const response = await services.authorService.find(id);
       setAuthor(response.data)
     }catch(error) {
       console.log(error)
     }
   }
 
+
+  const handleChange = (e) => {
+    setAuthor({...author, [e.target.name]: e.target.value})
+  }
+
   const handleSave = async () => {
     try {
-      await services.authorService.update(selectedId, author);
-      fetchAuthorList();
-      setIsEditing(false);
+      await services.authorService.update(id, author);
+      navigate('/authors');
     } catch (error) {
       console.log(error);
     }
   }
 
-  const handleChange = (e) => {
-    setAuthor({...author, [e.target.name]: e.target.value})
+  const handleCancel = () => {
+    navigate('/authors');
   }
   
   return (
     <>
-      <h3>Change Author Record</h3>
+      <h3>Edit Author</h3>
       <div className='add-item'>
         <div className='field'>
           <label>Name:</label>
-          <input onChange={handleChange} value={author.name} name="name" type="text" />
+          <input 
+            name="name"
+            type="text"
+            onChange={handleChange} 
+            value={author?.name ? author.name : "Loading"} 
+          />
         </div>
         <div className='field'>
           <label>Birth Date:</label>
-          <input onChange={handleChange} value={author.birthDate} name='birthDate' type="date" />
+          <input 
+            name='birthDate' 
+            type="date"
+            onChange={handleChange} 
+            value={author?.birthDate ? author.birthDate : "Loading"} 
+          />
         </div>
         <div className='field'>
           <label>Country</label>
-          <input onChange={handleChange} value={author.country} name='country' type="text" />
+          <input 
+            name='country' 
+            type="text" 
+            onChange={handleChange} 
+            defaultValue={"Loading"}
+            value={author?.country ? author.country : "Loading"} 
+          />
         </div>
           <div className='btn-container'>
             <button onClick={handleSave}>Save</button>
-            <button onClick={() => handleCancel()}>Cancel</button>
+            <button onClick={handleCancel}>Cancel</button>
           </div>
       </div>
     </>
