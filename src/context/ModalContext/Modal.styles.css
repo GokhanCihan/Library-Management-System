@@ -1,0 +1,43 @@
+.modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: white;
+  min-width: 600px;
+  min-height: 200px;
+}
+
+.modal.success {
+  border: 5px solid greenyellow;
+}
+
+.modal.fail {
+  border: 5px solid salmon;
+}
+
+.modal-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  overflow: auto;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

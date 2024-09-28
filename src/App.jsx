@@ -16,32 +16,34 @@ import CreateAuthor from './pages/Authors/CreateAuthor';
 import CreateCategory from './pages/Categories/CreateCategory';
 import CreatePublisher from './pages/Publishers/CreatePublisher';
 import CreateBorrowing from './pages/Borrowings/CreateBorrowing';
-
+import { ModalProvider } from './context/ModalContext/ModalContext';
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<Home />} />
-        <Route path={"/books"} element={<Books />} />
-        <Route path={"/authors"} element={<Authors />} />
-        <Route path={"/categories"} element={<Categories />} />
-        <Route path={"/publishers"} element={<Publishers />} />
-        <Route path={"/borrowings"} element={<Borrowings />} />
-
-        <Route path={"/books/:id"} element={<EditBook />} />
-        <Route path={"/authors/:id"} element={<EditAuthor />} />
-        <Route path={"/categories/:id"} element={<EditCategory />} />
-        <Route path={"/publishers/:id"} element={<EditPublisher />} />
-        <Route path={"/borrowings/:id"} element={<EditBorrowing />} />
-
-        <Route path={"/books/new"} element={<CreateBook />} />
-        <Route path={"/authors/new"} element={<CreateAuthor />} />
-        <Route path={"/categories/new"} element={<CreateCategory />} />
-        <Route path={"/publishers/new"} element={<CreatePublisher />} />
-        <Route path={"/borrowings/new"} element={<CreateBorrowing />} />
-      </Routes>
+      <ModalProvider>
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/books"} element={<Books />} />
+          <Route path={"/authors"} element={<Authors />} />
+          <Route path={"/categories"} element={<Categories />} />
+          <Route path={"/publishers"} element={<Publishers />} />
+          <Route path={"/borrowings"} element={<Borrowings />} />
+    
+          <Route path={"/books/:id"} element={<EditBook />} />
+          <Route path={"/authors/:id"} element={<EditAuthor />} />
+          <Route path={"/categories/:id"} element={<EditCategory />} />
+          <Route path={"/publishers/:id"} element={<EditPublisher />} />
+          <Route path={"/borrowings/:id"} element={<EditBorrowing />} />
+    
+          <Route path={"/books/new"} element={<CreateBook />} />
+          <Route path={"/authors/new"} element={<CreateAuthor />} />
+          <Route path={"/categories/new"} element={<CreateCategory />} />
+          <Route path={"/publishers/new"} element={<CreatePublisher />} />
+          <Route path={"/borrowings/new"} element={<CreateBorrowing />} />
+        </Routes>
+      </ModalProvider>
     </BrowserRouter>
   )
 }
