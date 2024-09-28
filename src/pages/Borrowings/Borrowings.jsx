@@ -1,16 +1,14 @@
 import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
-import CreateBorrowing from './CreateBorrowing';
-import EditBorrowing from './EditBorrowing';
 import Main from '../../layouts/Main';
 import '../Pages.styles.css';
+import { useNavigate } from 'react-router-dom';
 
 function Borrowings() {
   const [borrowings, setBorrowings] = useState([]);
-  const [selectedId, setSelectedId] = useState(0);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBorrowings();
@@ -34,24 +32,8 @@ function Borrowings() {
     }
   }
 
-  const handleSubmit = async (newBorrowing) => {
-    try {
-      await services.borrowingService.create(newBorrowing);
-      setIsCreating(false);
-      fetchBorrowings();
-    }catch(error) {
-      console.log(error.response.data);
-    }
-  }
-
   const handleEdit = (id) => {
-    setIsEditing(true);
-    setSelectedId(id);
-  }
-
-  const handleCancel = () => {
-    setIsCreating(false);
-    setIsEditing(false);
+    navigate(`/borrowings/${id}`);
   }
 
   return (
@@ -64,20 +46,7 @@ function Borrowings() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-        {isCreating && 
-          <CreateBorrowing 
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel}
-          />}
-        {isEditing && 
-          <EditBorrowing 
-            setIsEditing={setIsEditing}
-            selectedId={selectedId}
-            fetchBorrowings={fetchBorrowings}
-            handleCancel={handleCancel}
-          />}
-        {(!isCreating && !isEditing) &&
-          <button onClick={(() => setIsCreating(true))}>Add New Borrowing</button>}
+        <button onClick={() => navigate('/borrowings/new')}>New Borrowing</button>
       </div>
     </Main>
   )

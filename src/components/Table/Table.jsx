@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import './Table.styles.css'
+import { useNavigate } from 'react-router-dom';
 
 function Table({title, columns, data, handleDelete, handleEdit}) {
   const headerRef = useRef(null);
-  const tableRef = useRef(null)
+  const tableRef = useRef(null);
 
   useEffect(() => {
     if (headerRef.current && tableRef.current) {
@@ -11,7 +12,6 @@ function Table({title, columns, data, handleDelete, handleEdit}) {
     }
   },[])
   
-  console.log(data);
   return (
     <div ref={tableRef} className='table'>
       <div className='header'>

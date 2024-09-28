@@ -2,18 +2,17 @@ import { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useEffect } from "react";
 import services from "../../services";
+import { useNavigate } from "react-router-dom";
 
-function CreateBook({handleSubmit, handleCancel}) {
-  const [book, setBook] = useState({
-    name: "",
-    birthDate: "",
-    country: ""
-  });
+function CreateBook() {
+  const [book, setBook] = useState("");
 
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
   const [publishers, setPublishers] = useState([]);
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
     fetchAuthors();
     fetchCategories();
@@ -47,8 +46,6 @@ function CreateBook({handleSubmit, handleCancel}) {
     }
   }
 
-  const handleCreate = () => handleSubmit(book);
-
   const handleChange = (e) => setBook({...book, [e.target.name]: e.target.value});
 
   const handleChangeAuthor = (value) => setBook({...book, author: value});
@@ -56,12 +53,25 @@ function CreateBook({handleSubmit, handleCancel}) {
   const handleChangeCategories = (value) => setBook({...book, categories: value});
 
   const handleChangePublisher = (value) => setBook({...book, publisher: value});
+
+  const handleSave = async (newBook) => {
+    try {
+      await services.bookService.create(newBook);
+      navigate('/books');
+    }catch(error) {
+      console.log(error);
+    }
+  }
+
+  const handleCancel = () => {
+    navigate('/books');
+  }
   
   return (
     <>
-      <h3>New Book Record</h3>
+      <h3>New Book</h3>
       <div className='add-item'>
-      <div className='field'>
+        <div className='field'>
           <label>ID:</label>
           <input name="id" type="text" value={book.id} onChange={handleChange} />
         </div>
@@ -97,8 +107,8 @@ function CreateBook({handleSubmit, handleCancel}) {
           <input name='stock' type="text" value={book.stock} onChange={handleChange} />
         </div>
         <div className='btn-container'>
-          <button onClick={handleCreate}>Create</button>
-          <button onClick={() => handleCancel()}>Cancel</button>
+          <button onClick={() => handleSave(book)}>Save</button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </>

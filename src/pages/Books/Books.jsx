@@ -1,16 +1,14 @@
 import services from '../../services'
 import { useEffect, useState } from 'react';
 import Table from '../../components/Table';
-import CreateBook from './CreateBook';
-import EditBook from'./EditBook';
 import '../Pages.styles.css';
 import Main from '../../layouts/Main';
+import { useNavigate } from 'react-router-dom';
 
 function Books() {
   const [books, setBooks] = useState([]);
-  const [selectedBookId, setSelectedBookId] = useState(0);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBooks();
@@ -21,7 +19,7 @@ function Books() {
       const response = await services.bookService.findAll();
       setBooks(response.data);
     }catch(error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -34,24 +32,8 @@ function Books() {
     }
   }
 
-  const handleSubmit = async (newBook) => {
-    try {
-      await services.bookService.create(newBook);
-      setIsCreating(false);
-      fetchBooks();
-    }catch(error) {
-      console.log(error.response.data);
-    }
-  }
-
   const handleEdit = (id) => {
-    setIsEditing(true);
-    setSelectedBookId(id);
-  }
-
-  const handleCancel = () => {
-    setIsCreating(false);
-    setIsEditing(false);
+    navigate(`/books/${id}`);
   }
 
   return (
@@ -73,19 +55,7 @@ function Books() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-        {isEditing && 
-        <EditBook 
-          setIsEditing={setIsEditing}
-          selectedId={selectedBookId}
-          fetchBooks={fetchBooks}
-          handleCancel={handleCancel}
-        />}
-        {isCreating && 
-          <CreateBook 
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel}
-          />}
-          {(!isCreating && !isEditing) && <button onClick={(() => setIsCreating(true))}>Add New Book</button>}
+       <button onClick={() => navigate('/books/new')}>New Book</button>
       </div>
     </Main>
   )

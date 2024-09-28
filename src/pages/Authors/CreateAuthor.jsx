@@ -1,19 +1,34 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import services from "../../services";
 
-function CreateAuthor({handleSubmit, handleCancel}) {
+function CreateAuthor() {
   const [author, setAuthor] = useState({
     name: "",
     birthDate: "",
     country: ""
   });
 
-  const handleCreate = () => handleSubmit(author);
+  const navigate = useNavigate();
 
   const handleChange = (e) => setAuthor({...author, [e.target.name]: e.target.value});
+
+  const handleSave = async (newAuthor) => {
+    try {
+      await services.authorService.create(newAuthor);
+      navigate('/authors');
+    }catch(error) {
+      console.log(error);
+    }
+  }
+
+  const handleCancel = () => {
+    navigate('/authors');
+  }
   
   return (
     <>
-      <h3>New Author Record</h3>
+      <h3>New Author</h3>
       <div className='add-item'>
         <div className='field'>
           <label>Name:</label>
@@ -28,8 +43,8 @@ function CreateAuthor({handleSubmit, handleCancel}) {
           <input onChange={handleChange} value={author.country} name='country' type="text" />
         </div>
         <div className='btn-container'>
-          <button onClick={handleCreate}>Create</button>
-          <button onClick={() => handleCancel()}>Cancel</button>
+          <button onClick={() => handleSave(author)}>Save</button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </>
