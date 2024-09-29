@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function EditPublisher() {
   const [publisher, setPublisher] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchPublisher();
@@ -28,9 +30,16 @@ function EditPublisher() {
   const handleSave = async () => {
     try {
       await services.publisherService.update(id, publisher);
-      navigate('/publishers');
+      modal.alert({
+        message: "Publisher information updated successfuly!", 
+        status: "success",
+        onClose: () => navigate("/publishers")
+      });
     } catch (error) {
-      console.log(error);
+      modal.alert({
+        message: "Publisher update failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

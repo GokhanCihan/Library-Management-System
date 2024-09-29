@@ -3,6 +3,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useEffect } from "react";
 import services from "../../services";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function CreateBook() {
   const [book, setBook] = useState("");
@@ -12,6 +13,7 @@ function CreateBook() {
   const [publishers, setPublishers] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
   
   useEffect(() => {
     fetchAuthors();
@@ -57,9 +59,16 @@ function CreateBook() {
   const handleSave = async (newBook) => {
     try {
       await services.bookService.create(newBook);
-      navigate('/books');
+      modal.alert({
+        message: "Book record created successfuly!", 
+        status: "success",
+        onClose: () => navigate("/books")
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Book save failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 
@@ -71,10 +80,6 @@ function CreateBook() {
     <>
       <h3>New Book</h3>
       <div className='add-item'>
-        <div className='field'>
-          <label>ID:</label>
-          <input name="id" type="text" value={book.id} onChange={handleChange} />
-        </div>
         <div className='field'>
           <label>Name:</label>
           <input name="name" type="text" value={book.name} onChange={handleChange} />

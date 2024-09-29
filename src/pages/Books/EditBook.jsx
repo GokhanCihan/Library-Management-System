@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import services from "../../services";
 import { Autocomplete, TextField } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function EditBook() {
-
   const [book, setBook] = useState([]);
-
   const [fetched, setFetched] = useState(false);
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -14,6 +13,7 @@ function EditBook() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchBook();
@@ -70,9 +70,16 @@ function EditBook() {
   const handleSave = async () => {
     try {
       await services.bookService.update(id, book);
-      navigate('/books');
+      modal.alert({
+        message: "Book information updated successfuly!", 
+        status: "success",
+        onClose: () => navigate("/books")
+      });
     } catch (error) {
-      console.log(error);
+      modal.alert({
+        message: "Book update failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

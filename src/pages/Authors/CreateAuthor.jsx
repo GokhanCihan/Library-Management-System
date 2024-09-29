@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import services from "../../services";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function CreateAuthor() {
   const [author, setAuthor] = useState({
@@ -10,15 +11,23 @@ function CreateAuthor() {
   });
 
   const navigate = useNavigate();
-
+  const modal = useModal();
+  
   const handleChange = (e) => setAuthor({...author, [e.target.name]: e.target.value});
 
   const handleSave = async (newAuthor) => {
     try {
       await services.authorService.create(newAuthor);
-      navigate('/authors');
+      modal.alert({
+        message: "Author created successfuly!", 
+        status: "success",
+        onClose: () => navigate("/authors")
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Author save failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

@@ -4,11 +4,13 @@ import Table from "../../components/Table";
 import Main from "../../layouts/Main";
 import './../Pages.styles.css'
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function Publishers() {
   const [publishers, setPublishers] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchPublisherList();
@@ -27,8 +29,15 @@ function Publishers() {
     try {
       await services.publisherService.remove(id);
       fetchPublisherList();
+      modal.alert({
+        message: "Publisher record removed!", 
+        status: "success",
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Publisher removal failed!", 
+        status: "fail"
+      });
     }
   }
 

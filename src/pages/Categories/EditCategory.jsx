@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function EditCategory() {
   const [category, setCategory] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchCategory();
@@ -28,9 +30,16 @@ function EditCategory() {
   const handleSave = async () => {
     try {
       await services.categoryService.update(id, category);
-      navigate('/categories');
+      modal.alert({
+        message: "Category information updated successfuly!", 
+        status: "success",
+        onClose: () => navigate("/categories")
+      });
     } catch (error) {
-      console.log(error);
+      modal.alert({
+        message: "Category update failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

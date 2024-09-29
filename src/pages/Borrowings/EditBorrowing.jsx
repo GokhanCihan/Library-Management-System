@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function EditBorrowing() {
   const [selectedBorrowing, setSelectedBorrowing] = useState([]);
@@ -8,6 +9,7 @@ function EditBorrowing() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchBorrowing();
@@ -31,9 +33,16 @@ function EditBorrowing() {
   const handleSave = async () => {
     try {
       await services.borrowingService.update(id, borrowing);
-      navigate('/borrowings')
+      modal.alert({
+        message: "Borrowing information updated successfuly!", 
+        status: "success",
+        onClose: () => navigate("/borrowings")
+      });
     } catch (error) {
-      console.log(error);
+      modal.alert({
+        message: "Borrowing update failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

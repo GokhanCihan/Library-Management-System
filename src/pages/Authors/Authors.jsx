@@ -4,11 +4,13 @@ import Table from '../../components/Table';
 import '../Pages.styles.css';
 import Main from '../../layouts/Main';
 import { useNavigate } from 'react-router-dom';
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function Authors() {
   const [authors, setAuthors] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchAuthorList();
@@ -26,9 +28,16 @@ function Authors() {
   const handleDelete = async (id) => {
     try {
       await services.authorService.remove(id);
-      fetchAuthorList();
+      fetchAuthorList()
+      modal.alert({
+        message: "Author record removed!", 
+        status: "success",
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Author removal failed!", 
+        status: "fail"
+      });
     }
   }
 

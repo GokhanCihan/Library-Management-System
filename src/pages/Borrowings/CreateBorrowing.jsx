@@ -3,12 +3,14 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useEffect } from "react";
 import services from "../../services";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function CreateBorrowing() {
   const [borrowing, setBorrowing] = useState({id: 0,});
   const [books, setBooks] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchBooks();
@@ -37,9 +39,16 @@ function CreateBorrowing() {
   const handleSave = async (newBorrowing) => {
     try {
       await services.borrowingService.create(newBorrowing);
-      navigate('/borrowings');
+      modal.alert({
+        message: "Borrowing record created successfuly!", 
+        status: "success",
+        onClose: () => navigate("/borrowings")
+      });
     }catch(error) {
-      console.log(error.response.data);
+      modal.alert({
+        message: "Borrowing save failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

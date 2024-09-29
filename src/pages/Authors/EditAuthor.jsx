@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import services from "../../services";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function EditAuthor() {
   const [author, setAuthor] = useState();
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchAuthor();
@@ -21,7 +23,6 @@ function EditAuthor() {
     }
   }
 
-
   const handleChange = (e) => {
     setAuthor({...author, [e.target.name]: e.target.value})
   }
@@ -29,9 +30,16 @@ function EditAuthor() {
   const handleSave = async () => {
     try {
       await services.authorService.update(id, author);
-      navigate('/authors');
+      modal.alert({
+        message: "Author information updated successfuly!", 
+        status: "success",
+        onClose: () => navigate("/authors")
+      });
     } catch (error) {
-      console.log(error);
+      modal.alert({
+        message: "Author update failed due to incorrect/insufficient information. Please, try again.", 
+        status: "fail"
+      });
     }
   }
 

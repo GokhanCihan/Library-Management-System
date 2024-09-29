@@ -4,11 +4,13 @@ import Table from '../../components/Table';
 import '../Pages.styles.css';
 import Main from '../../layouts/Main';
 import { useNavigate } from 'react-router-dom';
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function Books() {
   const [books, setBooks] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchBooks();
@@ -27,8 +29,15 @@ function Books() {
     try {
       await services.bookService.remove(id);
       fetchBooks();
+      modal.alert({
+        message: "Book record removed!", 
+        status: "success",
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Book removal failed!", 
+        status: "fail"
+      });
     }
   }
 

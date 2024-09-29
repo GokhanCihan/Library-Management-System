@@ -4,11 +4,13 @@ import Table from '../../components/Table';
 import Main from '../../layouts/Main';
 import '../Pages.styles.css';
 import { useNavigate } from 'react-router-dom';
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function Categories() {
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchCategoryList();
@@ -27,8 +29,15 @@ function Categories() {
     try {
       await services.categoryService.remove(id);
       fetchCategoryList();
+      modal.alert({
+        message: "Category record removed!", 
+        status: "success",
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Category removal failed!", 
+        status: "fail"
+      });
     }
   }
 

@@ -4,11 +4,13 @@ import Table from '../../components/Table';
 import Main from '../../layouts/Main';
 import '../Pages.styles.css';
 import { useNavigate } from 'react-router-dom';
+import { useModal } from "../../context/ModalContext/ModalContext";
 
 function Borrowings() {
   const [borrowings, setBorrowings] = useState([]);
 
   const navigate = useNavigate();
+  const modal = useModal();
 
   useEffect(() => {
     fetchBorrowings();
@@ -27,8 +29,15 @@ function Borrowings() {
     try {
       await services.borrowingService.remove(id);
       fetchBorrowings();
+      modal.alert({
+        message: "Borrowing record removed!", 
+        status: "success",
+      });
     }catch(error) {
-      console.log(error);
+      modal.alert({
+        message: "Borrowing removal failed!", 
+        status: "fail"
+      });
     }
   }
 
