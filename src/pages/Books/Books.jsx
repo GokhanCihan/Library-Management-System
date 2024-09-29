@@ -47,7 +47,6 @@ function Books() {
 
   return (
     <Main>
-      <div className='page'>
         <Table 
           title={"Book Records"}
           columns={["Name", "Publication Year", "Stock", "Author", "Publisher","Categories"]}
@@ -65,7 +64,6 @@ function Books() {
           handleEdit={handleEdit}
         />
        <button className="create" onClick={() => navigate('/books/new')}>New Book</button>
-      </div>
     </Main>
   )
 }

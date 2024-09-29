@@ -47,7 +47,6 @@ function Authors() {
 
   return (
     <Main>
-      <div className='page'>
         <Table 
           title={"Author Records"}
           columns={["Name", "Date of Birth", "Country"]}
@@ -55,8 +54,7 @@ function Authors() {
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />
-        <button className='create' onClick={() => navigate('/authors/new')}>New Author</button>
-      </div>      
+        <button className='create' onClick={() => navigate('/authors/new')}>New Author</button>     
     </Main>
   )
 }

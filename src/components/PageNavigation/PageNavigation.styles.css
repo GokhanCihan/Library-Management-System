@@ -9,12 +9,14 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 30px;
   align-items: center;
   align-self: flex-end;
+  font-size: 16px;
   border-style: none;
-  border: 1px solid blanchedalmond;
+  border: 1px solid saddlebrown;
   background-color: transparent;
+  border-radius: 10px;
 }
 
 .page-link img {

@@ -32,7 +32,7 @@ function CreateCategory() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>New Category</h3>
       <div className='add-item'>
         <div className='field'>
@@ -48,7 +48,7 @@ function CreateCategory() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

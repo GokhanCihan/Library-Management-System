@@ -48,7 +48,7 @@ function EditAuthor() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>Edit Author</h3>
       <div className='add-item'>
         <div className='field'>
@@ -84,7 +84,7 @@ function EditAuthor() {
             <button onClick={handleCancel}>Cancel</button>
           </div>
       </div>
-    </>
+    </div>
   )
 }
 

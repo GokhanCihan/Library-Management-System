@@ -1,4 +1,13 @@
 #root {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
+}
+
+button {
+  cursor: pointer;
+  box-shadow: 2px 2px 3px -1px;
+}
+
+button:active {
+  box-shadow: 2px 2px 3px;
 }

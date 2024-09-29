@@ -48,7 +48,7 @@ function EditPublisher() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>Edit Publisher</h3>
       <div className='add-item'>
         <div className='field'>
@@ -68,7 +68,7 @@ function EditPublisher() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

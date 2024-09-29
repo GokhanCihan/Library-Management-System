@@ -48,7 +48,7 @@ function EditCategory() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>Edit Category</h3>
       <div className='add-item'>
         <div className='field'>
@@ -64,7 +64,7 @@ function EditCategory() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

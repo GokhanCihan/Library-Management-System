@@ -47,7 +47,6 @@ function Categories() {
 
   return (
     <Main>
-      <div className='page'>
         <Table 
           title={"Category Records"}
           columns={["Name", "Description"]}
@@ -56,7 +55,6 @@ function Categories() {
           handleEdit={handleEdit}
         />
        <button className="create" onClick={() => navigate('/categories/new')}>New Category</button>
-      </div>
     </Main>
   )
 }

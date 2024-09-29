@@ -19,7 +19,7 @@ const RandomQuote = () => {
 
   return (
     <div>
-      <span className="random-quote">{randomQuote.quote}</span>
+      <span className="random-quote playwrite-de-grund">{randomQuote.quote}</span>
       <span className="quote-author">- {randomQuote.author}</span>
     </div>
   );

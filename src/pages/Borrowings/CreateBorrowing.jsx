@@ -57,7 +57,7 @@ function CreateBorrowing() {
   }
 
   return (
-    <>
+    <div className="form">
       <h3>New Borrowing</h3>
       <div className='add-item'>
         <div className='field'>
@@ -83,7 +83,7 @@ function CreateBorrowing() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

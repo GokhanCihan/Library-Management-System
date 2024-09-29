@@ -47,7 +47,6 @@ function Borrowings() {
 
   return (
     <Main>    
-      <div className='page'>
         <Table 
           title={"Borrowing Records"}
           columns={["Borrower", "Mail", "Date Borrowed", "Date Returned", "Book"]}
@@ -55,8 +54,6 @@ function Borrowings() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-        <button className="create" onClick={() => navigate('/borrowings/new')}>New Borrowing</button>
-      </div>
     </Main>
   )
 }

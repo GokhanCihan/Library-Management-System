@@ -36,7 +36,7 @@ function CreateAuthor() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>New Author</h3>
       <div className='add-item'>
         <div className='field'>
@@ -56,7 +56,7 @@ function CreateAuthor() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

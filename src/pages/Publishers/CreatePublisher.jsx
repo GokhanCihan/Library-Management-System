@@ -32,7 +32,7 @@ function CreatePublisher() {
   }
 
   return (
-    <>
+    <div className="form">
       <h3>New Publisher</h3>
       <div className='add-item'>
         <div className='field'>
@@ -52,7 +52,7 @@ function CreatePublisher() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

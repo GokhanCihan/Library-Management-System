@@ -88,7 +88,7 @@ function EditBook() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>Edit Book</h3>
       {fetched &&
         <div className='add-item'>
@@ -134,7 +134,7 @@ function EditBook() {
           </div>
         </div>
       }
-    </>
+    </div>
   )
 }
 

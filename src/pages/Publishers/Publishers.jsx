@@ -47,7 +47,6 @@ function Publishers() {
 
   return (
     <Main>
-      <div className='page'>
         <Table 
           title={"Publisher Records"}
           columns={["Name", "Establisment Year", "Address"]}
@@ -56,7 +55,6 @@ function Publishers() {
           handleEdit={handleEdit}
         />
       <button className="create" onClick={() => navigate('/publishers/new')}>New Publisher</button>
-      </div>
     </Main>
   )
 }

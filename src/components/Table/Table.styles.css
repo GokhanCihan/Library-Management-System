@@ -1,25 +1,32 @@
 .table {
+  height: auto;
+  margin: 0 auto;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 50vh;
-  margin: 0 auto;
   overflow-y: scroll;
-  padding: 0 1rem;
-  gap: 5px;
 }
 
 .table .header {
   position: sticky;
   top: 0;
-  background-color: white;
-  border-bottom: 1px solid black; 
+  flex: 0;
+  background-color: peachpuff;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
+}
+
+.table .header h3 {
+  padding: 10px;
+  font-size: 24px;
 }
 
 .table .header-row {
   display: grid;
   padding: 10px 10px;
   flex-wrap: nowrap;
+  font-size: 20px;
   font-weight: 600;
   text-align: start;
   padding: 0 10px;
@@ -29,16 +36,18 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  flex: 1;
 }
 
 .row {
+  padding: 10px 10px;
   display: grid;
   flex-wrap: nowrap;
-  padding: 10px 10px;
+  align-items: center;
+  column-gap: 10px;
   border: 1px solid gray;
   border-radius: 10px;
-  column-gap: 10px;
-  align-items: center;
+  font-size: 18px;
 }
 
 .row-container .row:nth-child(2n){

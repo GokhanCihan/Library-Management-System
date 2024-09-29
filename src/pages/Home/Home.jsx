@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div className="start">
-        <h1>Library</h1>
+        <h1>Library Manager</h1>
         <RandomQuote />
       </div>
       <PageNavigation />

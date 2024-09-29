@@ -4,16 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 function Table({title, columns, data, handleDelete, handleEdit}) {
   const headerRef = useRef(null);
-  const tableRef = useRef(null);
 
   useEffect(() => {
-    if (headerRef.current && tableRef.current) {
+    if (headerRef.current) {
       headerRef.current.style.gridTemplateColumns = `repeat(${columns.length+1}, minmax(100px, 1fr))`;
     }
   },[])
   
   return (
-    <div ref={tableRef} className='table'>
+    <div className='table'>
       <div className='header'>
         <h3>{title}</h3>
         <div ref={headerRef} className='header-row'>

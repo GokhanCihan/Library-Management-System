@@ -51,7 +51,7 @@ function EditBorrowing() {
   }
   
   return (
-    <>
+    <div className="form">
       <h3>Edit Borrowing</h3>
       <div className='add-item'>
         <div className='field'>
@@ -71,7 +71,7 @@ function EditBorrowing() {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
