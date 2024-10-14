@@ -54,6 +54,7 @@ function Borrowings() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
+        <button className="create" onClick={() => navigate('/borrowings/new')}>New Borrowing</button>
     </Main>
   )
 }
